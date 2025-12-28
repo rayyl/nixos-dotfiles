@@ -42,6 +42,15 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      kdePackages.fcitx5-chinese-addons
+    ];
+    fcitx5.waylandFrontend = true;
+  };
+
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver = {
