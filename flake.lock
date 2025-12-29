@@ -36,10 +36,52 @@
         "type": "github"
       }
     },
+    "noctalia": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767028554,
+        "narHash": "sha256-XLtYXGShrlVyfeBakt48NJDSwTQejZTkgciLk8Tf8L4=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "de68fd6d21f2a5eaee01c33954b8b9bbd957c17e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "type": "github"
+      }
+    },
+    "quickshell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1766725085,
+        "narHash": "sha256-O2aMFdDUYJazFrlwL7aSIHbUSEm3ADVZjmf41uBJfHs=",
+        "owner": "outfoxxed",
+        "repo": "quickshell",
+        "rev": "41828c4180fb921df7992a5405f5ff05d2ac2fff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "outfoxxed",
+        "repo": "quickshell",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "noctalia": "noctalia",
+        "quickshell": "quickshell",
         "zen-browser": "zen-browser"
       }
     },
