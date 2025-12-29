@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
   imports =
@@ -23,6 +23,10 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  hardware.bluetooth.enable = true;
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -51,7 +55,7 @@
     fcitx5.waylandFrontend = true;
   };
 
-  # Enable the X11 windowing system.
+    # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver = {
     enable = true;
@@ -106,8 +110,14 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes"];
 
+  programs.niri.enable = true;
+
   # Install firefox.
   programs.firefox.enable = true;
+
+  programs.steam = {
+    enable = true;
+  };
 
   programs.zsh = {
     enable = true;
@@ -122,19 +132,40 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-unwrapped"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     bat
+    btop
+    fuzzel
     git
+    heroic
+    kdePackages.kdeconnect-kde
+    kdePackages.kdeplasma-addons
+    kdePackages.plasma-nm
+    kdePackages.plasma-pa
     neofetch
     tealdeer
     vim
     virtualbox
     vscode
-    inputs.zen-browser.packages."${system}".default
+    w3m
+    xwayland-satellite
+    inputs.noctalia.packages.${system}.default
+    inputs.zen-browser.packages.${system}.default
   ];
+
+  environment.sessionVariables = {
+    XDG_SESSION_TYPE = "wayland";
+    XDG_CURRENT_DESKTOP = "niri";
+    # Optional: helps with apps that look for GNOME/KDE themes
+    # XDG_MENU_PREFIX = "arch-"; 
+  };
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
