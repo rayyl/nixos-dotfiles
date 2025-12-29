@@ -40,5 +40,6 @@ in
   home.packages = with pkgs; [
     alacritty
     picom
+    neovim
   ];
 }
