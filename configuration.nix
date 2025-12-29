@@ -28,6 +28,8 @@
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
 
+  hardware.graphics.enable32Bit = true;
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
