@@ -4,10 +4,11 @@ let
     dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
     create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
     # Standard .config/directory
-    configs = {
-      alacritty = "alacritty";
-      picom = "picom";
-    };
+    configs = [
+      "alacritty"
+      "picom"
+      "niri"
+    ];
 in
 
 {
@@ -24,18 +25,13 @@ in
   };
 
   # Iterate over xdg configs and map them accordingly
-  xdg.configFile = builtins.mapAttrs (name: subpath: {
-    source = create_symlink "${dotfiles}/${subpath}";
+  xdg.configFile = builtins.listToAttrs ( map(path: {
+    name = path;
+    value = {
+    source = create_symlink "${dotfiles}/${path}";
     recursive = true;
-  }) configs;
-
-#  xdg.configFile = builtins.listToAttrs ( map(path: {
-#    name = path;
-#    value = {
-#    source = create_symlink "${dotfiles}/${path}";
-#    recursive = true;
-#    };
-#  }) configs);
+    };
+  }) configs);
 
   home.packages = with pkgs; [
     alacritty
