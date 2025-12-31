@@ -144,6 +144,9 @@
   environment.systemPackages = with pkgs; [
     bat
     btop
+    cava
+    cavasik
+    cmatrix
     fuzzel
     git
     heroic
@@ -151,8 +154,11 @@
     kdePackages.kdeplasma-addons
     kdePackages.plasma-nm
     kdePackages.plasma-pa
+    matugen
     neofetch
+    spotify
     tealdeer
+    ticker
     vim
     virtualbox
     vscode
